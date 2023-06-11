@@ -1,0 +1,27 @@
+.login-form-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+}
+
+.ui-card {
+  background-color: lavender;
+}
+
+.example-header-image {
+  background-image: url('https://payfull.com/sites/all/themes/payfull2_theme/images/icons/Bayi_Tahsilat_Sistemi.png');
+  background-size: cover;
+}
+
+mat-form-field {
+  margin-right: 12px;
+}
+
+.button-flex {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  color: #1976d2;
+  margin-left: 10px;
+}
