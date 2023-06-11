@@ -1,0 +1,31 @@
+.card-header {
+    color: #3366ff;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.card-header-actions {
+    color: #3366ff;
+    font-size: 1rem;
+}
+
+.example-full-width {
+    width: 100%;
+    min-width: 150px;
+    max-width: 450px;
+    max-height: 300px;
+}
+
+.btn-sorgula {
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    margin-top: 0.8rem;
+    color: #808B96;
+  }
+  
+  .btn-sorgula i:hover {
+    color: blue;
+  }

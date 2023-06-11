@@ -1,0 +1,22 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header" [ngStyle]="{'background' : 'url(assets/img/bg.jpg)', backgroundSize : 'cover'}">
+            İş Yeri Listesi
+            <div class="card-header-actions">
+                <button>+</button>
+            </div>
+        </div>
+        <div class="card-body" [ngStyle]="{'background' : 'url(assets/img/bg.jpg)', backgroundSize : 'cover'}">
+            <div class="w-96 centered block">
+                <Form>
+                    <div id="grid" class="ag-theme-alpine">
+                        <ag-grid-angular style="width: 100%; height: 65vh" [pagination]="true" [paginationPageSize]="20"
+                            [enableCellChangeFlash]="true" [rowData]="rowData" [columnDefs]="columns"
+                            [defaultColDef]="gridDef" [rowSelection]="gridSelection" [overlayNoRowsTemplate]="overlayNoRows">
+                        </ag-grid-angular>
+                    </div>
+                </Form>
+            </div>
+        </div>
+    </div>
+</div>

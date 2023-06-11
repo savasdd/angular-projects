@@ -1,0 +1,48 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header" [ngStyle]="{'background' : 'url(assets/img/bg.jpg)', backgroundSize : 'cover'}">
+            Personel Özlük Bilgileri
+            <div class="card-header-actions">
+            </div>
+        </div>
+        <div class="card-body" [ngStyle]="{'background' : 'url(assets/img/bg.jpg)', backgroundSize : 'cover'}">
+            <p-tabView (onChange)="handleChange($event)">
+                <p-tabPanel header="Askerlik Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-askerlik-list></app-askerlik-list>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Telefon ve Adres Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-adres-list></app-adres-list>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Öğrenim Bilgileri">
+                    <ng-template pTemplate="content">
+                        
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Eğitim Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-birim-edit></app-birim-edit>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Yabancı Dil Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-birim-edit></app-birim-edit>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Hizmet Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-birim-edit></app-birim-edit>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Görev Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-rapor-kod-list></app-rapor-kod-list>
+                    </ng-template>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </div>
+</div>

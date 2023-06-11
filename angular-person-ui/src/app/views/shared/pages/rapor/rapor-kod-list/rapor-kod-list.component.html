@@ -1,0 +1,30 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header" [ngStyle]="{'background' : 'url(assets/img/bg.jpg)', backgroundSize : 'cover'}">
+            Kod Raporları
+            <div class="card-header-actions">
+                <button>+</button>
+            </div>
+        </div>
+        <div class="card-body" [ngStyle]="{'background' : 'url(assets/img/bg.jpg)', backgroundSize : 'cover'}">
+            <mat-form-field style="width: 100%; max-width: 160px;" appearance="fill">
+                <mat-label style="font-weight: bold;">İşlem Türü Seçin</mat-label>
+                <mat-select (selectionChange)="onIslem($event.value)">
+                    <mat-option> </mat-option>
+                    <mat-option *ngFor="let kurum of islemList" [value]="kurum">{{kurum.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>&nbsp;&nbsp;
+
+            <mat-form-field style="width: 100%; max-width: 250px;" appearance="fill">
+                <mat-label style="font-weight: bold;">Üst Kod Seçin</mat-label>
+                <mat-select (selectionChange)="onKod($event.value)">
+                    <mat-option> </mat-option>
+                    <mat-option *ngFor="let isyeri of kodList" [value]="isyeri">{{isyeri.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>&nbsp;&nbsp;
+            <button pButton pRipple type="button" label="Rapor Al" class="p-button-outlined"
+                style="margin-bottom: 17px; margin-left: 10px;" (click)="sorgula()"></button>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="animated fadeIn">
+    <div class="card-header" [ngStyle]="{'background' : 'url(assets/img/bg.jpg)', backgroundSize : 'cover'}">
+        Öğrenim Bilgileri
+        <div class="card-header-actions">
+            <button>+</button>
+        </div>
+    </div>
+    <Form>
+        <div id="grid" class="ag-theme-alpine">
+            <ag-grid-angular style="margin-top: 0px; height: 55vh" [pagination]="true" [paginationPageSize]="20"
+                [enableCellChangeFlash]="true" [rowData]="rowData" [columnDefs]="columns" [defaultColDef]="gridDef"
+                onGridReady={onGridReady} [rowSelection]="gridSelection" [overlayNoRowsTemplate]="overlayNoRows">
+            </ag-grid-angular>
+        </div>
+    </Form>
+</div>

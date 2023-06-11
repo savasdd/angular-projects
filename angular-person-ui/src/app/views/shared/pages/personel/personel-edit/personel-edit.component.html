@@ -1,0 +1,48 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header" [ngStyle]="{'background' : 'url(assets/img/bg.jpg)', backgroundSize : 'cover'}">
+            Personel Özlük Bilgileri
+            <div class="card-header-actions">
+            </div>
+        </div>
+        <div class="card-body" [ngStyle]="{'background' : 'url(assets/img/bg.jpg)', backgroundSize : 'cover'}">
+            <p-tabView (onChange)="handleChange($event)">
+                <p-tabPanel header="Askerlik Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-askerlik-list [personelId]="personelId"></app-askerlik-list>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Telefon ve Adres Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-adres-list [personelId]="personelId"></app-adres-list>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Öğrenim Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-ogrenim-list [personelId]="personelId"></app-ogrenim-list>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Eğitim Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-egitim-list [personelId]="personelId"></app-egitim-list>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Yabancı Dil Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-dil-list [personelId]="personelId"></app-dil-list>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Hizmet Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-hizmet-list [personelId]="personelId"></app-hizmet-list>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Görev Bilgileri">
+                    <ng-template pTemplate="content">
+                        <app-gorev-list [personelId]="personelId"></app-gorev-list>
+                    </ng-template>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </div>
+</div>

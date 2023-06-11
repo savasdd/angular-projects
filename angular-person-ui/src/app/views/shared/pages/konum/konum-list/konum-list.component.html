@@ -1,0 +1,38 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header" [ngStyle]="{'background' : 'url(assets/img/bg.jpg)', backgroundSize : 'cover'}">
+            Konum Listesi
+            <div class="card-header-actions">
+                <button>+</button>
+            </div>
+        </div>
+        <div class="card-body" [ngStyle]="{'background' : 'url(assets/img/bg.jpg)', backgroundSize : 'cover'}">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label style="font-weight: bold;">Kurum Seçin</mat-label>
+                <mat-select (selectionChange)="getIsYeri($event.value)">
+                    <mat-option> </mat-option>
+                    <mat-option *ngFor="let kurum of kurumList" [value]="kurum">{{kurum.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>&nbsp;&nbsp;
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label style="font-weight: bold;">İş Yeri Seçin</mat-label>
+                <mat-select (selectionChange)="getData($event.value)">
+                    <mat-option> </mat-option>
+                    <mat-option *ngFor="let isyeri of isYeriList" [value]="isyeri">{{isyeri.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>&nbsp;&nbsp;
+
+            <div class="w-96 centered block">
+                <Form>
+                    <div id="grid" class="ag-theme-alpine">
+                        <ag-grid-angular style="width: 100%; height: 65vh" [pagination]="true" [paginationPageSize]="20"
+                            [enableCellChangeFlash]="true" [rowData]="rowData" [columnDefs]="columns"
+                            [defaultColDef]="gridDef" onGridReady={onGridReady} [overlayNoRowsTemplate]="overlayNoRows">
+                        </ag-grid-angular>
+                    </div>
+                </Form>
+            </div>
+        </div>
+    </div>
+</div>
