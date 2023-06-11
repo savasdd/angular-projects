@@ -1,0 +1,180 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "fuse": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "",
+            "sourceRoot": "src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "/AngularBuilder/smartLife",
+                        "index": "src/index.html",
+                        "main": "src/main.ts",
+                        "polyfills": [
+                            "zone.js",
+                            "src/polyfills.ts"
+                        ],
+                        "tsConfig": "tsconfig.app.json",
+                        "inlineStyleLanguage": "scss",
+                        "allowedCommonJsDependencies": [
+                            "apexcharts",
+                            "highlight.js",
+                            "crypto-js/enc-utf8",
+                            "crypto-js/hmac-sha256",
+                            "crypto-js/enc-base64",
+                            "flat",
+                            "quill"
+                        ],
+                        "assets": [
+                            "src/favicon-16x16.png",
+                            "src/favicon-32x32.png",
+                            "src/assets",
+                            {
+                                "glob": "_redirects",
+                                "input": "src",
+                                "output": "/"
+                            }
+                        ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "src/@fuse/styles"
+                            ]
+                        },
+                        "styles": [
+                            "src/@fuse/styles/tailwind.scss",
+                            "src/@fuse/styles/themes.scss",
+                            "src/styles/vendors.scss",
+                            "src/@fuse/styles/main.scss",
+                            "src/styles/styles.scss",
+                            "src/styles/tailwind.scss",
+                            "src/styles/main.scss",
+                            "node_modules/slick-carousel/slick/slick.scss",
+                            "node_modules/slick-carousel/slick/slick-theme.scss",
+                            "node_modules/devextreme/dist/css/dx.common.css",
+                            "node_modules/@devexpress/analytics-core/dist/css/dx-analytics.common.css",
+                            "node_modules/@devexpress/analytics-core/dist/css/dx-analytics.light.css",
+                            "node_modules/@devexpress/analytics-core/dist/css/dx-querybuilder.css",
+                            "node_modules/devexpress-dashboard/dist/css/dx-dashboard.light.css",
+                            "node_modules/devexpress-reporting/dist/css/dx-reportdesigner.css",
+                            "node_modules/devexpress-reporting/dist/css/dx-webdocumentviewer.css",
+                            "node_modules/devexpress-diagram/dist/dx-diagram.min.css",
+                            {
+                                "input": "node_modules/devextreme/dist/css/dx.material.blue.light.css",
+                                "bundleName": "dx.material.blue.light",
+                                "inject": false
+                            },
+                            {
+                                "input": "node_modules/devextreme/dist/css/dx.light.css",
+                                "bundleName": "dx.generic.light",
+                                "inject": false
+                            },
+                            "node_modules/leaflet/dist/leaflet.css",
+                            "node_modules/leaflet-fullscreen/dist/leaflet.fullscreen.css",
+                            "node_modules/leaflet-mouse-position/src/L.Control.MousePosition.css",
+                            "node_modules/leaflet.markercluster/dist/MarkerCluster.css",
+                            "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
+                            "node_modules/leaflet-easybutton/src/easy-button.css",
+                            "node_modules/leaflet-draw/dist/leaflet.draw.css",
+                            "node_modules/leaflet-contextmenu/dist/leaflet.contextmenu.css",
+                            "node_modules/leaflet-iconmaterial/dist/leaflet.icon-material.css",
+                            "node_modules/@material/fab/dist/mdc.fab.css",
+                            "src/styles/soft-ui/soft-ui-dashboard-tailwind.css"
+                        ],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.js",
+                            "node_modules/slick-carousel/slick/slick.min.js",
+                            "node_modules/devextreme/dist/js/dx.all.js"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "10mb",
+                                    "maximumError": "50mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "75kb",
+                                    "maximumError": "90kb"
+                                }
+                            ],
+                            "outputHashing": "all"
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "port": 4662
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "fuse:build:production"
+                        },
+                        "development": {
+                            "browserTarget": "fuse:build:development"
+                        }
+                    },
+                    "defaultConfiguration": "development"
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "fuse:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "polyfills": [
+                            "zone.js",
+                            "zone.js/testing",
+                            "src/polyfills.ts"
+                        ],
+                        "tsConfig": "tsconfig.spec.json",
+                        "inlineStyleLanguage": "scss",
+                        "assets": [
+                            "src/favicon-16x16.png",
+                            "src/favicon-32x32.png",
+                            "src/assets"
+                        ],
+                        "styles": [
+                            "src/styles/styles.scss"
+                        ],
+                        "scripts": []
+                    }
+                }
+            }
+        }
+    },
+    "cli": {
+      "analytics": "40ca8d8a-4907-49ca-871e-9357b48f7770"
+    }
+}

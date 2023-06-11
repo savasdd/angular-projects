@@ -1,0 +1,95 @@
+<div
+    class="flex flex-col sm:flex-row md:flex-col flex-auto justify-between py-8 px-6 md:px-8 border-b bg-card dark:bg-transparent">
+    <div>
+        <div class="text-2xl font-extrabold tracking-tight">{{ 'profile.list' | transloco | localeTitleCase }}</div>
+        <dx-data-grid #profileDataGrid
+                      [columnAutoWidth]="false"
+                      [dataSource]="dataSource"
+                      [showRowLines]="true"
+                      [rowAlternationEnabled]="true">
+
+            <dxo-editing
+                mode="popup"
+                [allowUpdating]="true"
+                [allowDeleting]="true"
+                [allowAdding]="true"
+                [useIcons]="true">
+
+                <dxo-popup title="{{'profile.detail'| transloco|localeTitleCase}}"
+                           [showTitle]="true"
+                           [showCloseButton]="true"
+                           [width]="600"
+                           [height]="350">>
+                </dxo-popup>
+                <dxo-form>
+                    <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+                        <dxi-item dataField="name" [colSpan]="2">
+                            <dxi-validation-rule type="required"></dxi-validation-rule>
+                        </dxi-item>
+                    </dxi-item>
+                </dxo-form>
+            </dxo-editing>
+
+            <dxi-column dataField="operationId" caption="{{'process'|transloco|localeTitleCase}}" dataType="text"
+                        width="5%"
+                        cellTemplate="operationTemplate"
+                        [allowSorting]="false" [allowFiltering]="false"></dxi-column>
+            <div style="text-align: center;" *dxTemplate="let data of 'operationTemplate'">
+                <button mat-mini-fab [matMenuTriggerFor]="menu"
+                        style="background-color: #7190e1;">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" style="height: 0.2rem">
+                    <button *ngIf="true" (click)="callTimeOperationListPopup(data,DayTypeEnum.Spesific)" mat-menu-item>
+                        <mat-icon>alarm</mat-icon>
+                        <span>{{'schedular' | transloco|localeTitleCase }}</span>
+                    </button>
+                </mat-menu>
+            </div>
+
+            <dxo-selection mode="single"></dxo-selection>
+            <dxi-column dataField="id" dataType="number" caption="ID" width="4rem"></dxi-column>
+            <dxi-column dataField="department.name" dataType="string"
+                        caption="{{'department'|transloco|localeTitleCase}}"></dxi-column>
+            <dxi-column dataField="name" dataType="string"
+                        caption="{{'profile.name'|transloco|localeTitleCase}}"></dxi-column>
+
+            <dxi-column type="buttons" [width]="110">
+                <dxi-button name="edit"></dxi-button>
+                <dxi-button name="delete"></dxi-button>
+            </dxi-column>
+            <dxo-search-panel
+                [visible]="true"
+                [width]="240"
+            >
+            </dxo-search-panel>
+
+            <dxo-load-panel [enabled]="true"></dxo-load-panel>
+
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager
+                [showPageSizeSelector]="true"
+                [allowedPageSizes]="[5,10, 20, 50, 100]"
+                [showInfo]="true">
+            </dxo-pager>
+
+            <dxo-header-filter
+                [visible]=false>
+            </dxo-header-filter>
+            <dxo-filter-row
+                [visible]="false">
+            </dxo-filter-row>
+
+            <dxo-remote-operations
+                [sorting]="true"
+                [paging]="true"
+                [filtering]="true">
+            </dxo-remote-operations>
+        </dx-data-grid>
+
+        <div>
+            <app-time [profileData]="profileData" [dayTypeData]="dayTypeData" *ngIf="profileData"
+                      (onHidingPopup)="onHidingNewSavePopup($event)"></app-time>
+        </div>
+    </div>
+</div>

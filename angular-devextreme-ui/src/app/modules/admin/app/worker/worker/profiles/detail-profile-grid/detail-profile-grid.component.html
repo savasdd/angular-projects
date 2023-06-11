@@ -1,0 +1,22 @@
+<dx-data-grid [dataSource]="profileDetailDataSource" [columnAutoWidth]="true" [height]="height"
+              (onToolbarPreparing)="onToolbarPreparing($event)">
+    <dxi-column dataField="dayType.name" caption="{{'dayType'|transloco|localeTitleCase}}"></dxi-column>
+    <dxi-column dataField="day" caption="{{'days'|transloco|localeTitleCase}}"></dxi-column>
+    <dxi-column dataField="startTime" caption="{{'from'|transloco|localeTitleCase}}"
+                [visible]="isSpesific"></dxi-column>
+    <dxi-column dataField="endedTime" caption="{{'to'|transloco|localeTitleCase}}" [visible]="isSpesific"></dxi-column>
+    <dxi-column dataField="fullTimeStart" caption="{{'from'|transloco|localeTitleCase}}" format="dd/MM/yyyy hh:ss"
+                dataType="date" [visible]="isCustom"></dxi-column>
+    <dxi-column dataField="fullTimeEnd" caption="{{'to'|transloco|localeTitleCase}}" format="dd/MM/yyyy hh:ss"
+                dataType="date" [visible]="isCustom"></dxi-column>
+
+    <dxo-paging [pageSize]="5"></dxo-paging>
+    <dxo-filter-row
+        [visible]="false">
+    </dxo-filter-row>
+    <div *dxTemplate="let data of 'info'">
+        <div class="informer">
+            <span class="name">{{'time.list'|transloco|localeTitleCase}}</span>
+        </div>
+    </div>
+</dx-data-grid>

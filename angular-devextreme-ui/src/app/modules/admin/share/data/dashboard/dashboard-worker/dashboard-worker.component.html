@@ -1,0 +1,77 @@
+<div
+    class="flex flex-col sm:flex-row md:flex-col flex-auto justify-between py-8 px-6 md:px-8 border-b bg-card dark:bg-transparent">
+    <dx-form id="form1" [colCount]="2">
+        <dxi-item itemType="group" class="border shadow-lg mt-2">
+            <dx-pie-chart
+                id="pie"
+                palette="ocean"
+                type="doughnut"
+                innerRadius="0.2"
+                [dataSource]="activityDataSource">
+                <dxo-title text="PROFİL BAZINDA AKTİVİTE GRAFİĞİ">
+                    <dxo-subtitle text=""></dxo-subtitle>
+                </dxo-title>
+                <dxo-legend [visible]="true"></dxo-legend>
+                <dxo-export [enabled]="true"></dxo-export>
+                <dxo-common-series-settings>
+                    <dxo-label [visible]="false"></dxo-label>
+                </dxo-common-series-settings>
+                <dxo-tooltip
+                    [enabled]="true"
+                    [customizeTooltip]="customizeTooltip"
+                ></dxo-tooltip>
+
+                <dxi-series
+                    name="Antivite"
+                    argumentField="Name"
+                    valueField="Count"
+                ></dxi-series>
+            </dx-pie-chart>
+        </dxi-item>
+
+        <dxi-item itemType="group" class="border shadow-lg mt-2">
+            <dx-pie-chart
+                id="pie"
+                title="PROFİL BAZINDA ÇALIŞAN GRAFİĞİ"
+                palette="bright"
+                [dataSource]="workerDataSource"
+                (onPointClick)="pointClickHandler($event)"
+                (onLegendClick)="legendClickHandler($event)"
+            >
+                <dxi-series name="Çalışan" argumentField="Name" valueField="Count">
+                    <dxo-label [visible]="true" text="Çalışan">
+                        <dxo-connector [visible]="true" [width]="1"></dxo-connector>
+                    </dxo-label>
+                </dxi-series>
+                <dxo-size [width]="500"></dxo-size>
+                <dxo-export [enabled]="true"></dxo-export>
+            </dx-pie-chart>
+        </dxi-item>
+
+
+    </dx-form>
+
+    <dx-form id="form2" [colCount]="2">
+<!--        <dxi-item itemType="group" class="border shadow-lg mt-2">-->
+<!--            <dx-chart-->
+<!--                id="chart"-->
+<!--                title="MOLA BAZINDA ÇALIŞAN GRAFİĞİ"-->
+<!--                [dataSource]="breakDataSource"-->
+<!--                [rotated]="false"-->
+<!--            >-->
+<!--                <dxi-series color="#33FFC4" type="bar" argumentField="Name" valueField="Count">-->
+<!--                    <dxo-label [visible]="true" backgroundColor="#c18e92"></dxo-label>-->
+<!--                </dxi-series>-->
+<!--                <dxo-argument-axis>-->
+<!--                    <dxo-label [customizeText]="customizeText"></dxo-label>-->
+<!--                </dxo-argument-axis>-->
+<!--                <dxi-value-axis>-->
+<!--                    <dxo-tick [visible]="false"></dxo-tick>-->
+<!--                    <dxo-label [visible]="false"></dxo-label>-->
+<!--                </dxi-value-axis>-->
+<!--                <dxo-export [enabled]="true"></dxo-export>-->
+<!--                <dxo-legend [visible]="false"></dxo-legend>-->
+<!--            </dx-chart>-->
+<!--        </dxi-item>-->
+    </dx-form>
+</div>

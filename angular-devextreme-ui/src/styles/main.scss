@@ -1,0 +1,323 @@
+.dx-toolbar-label .dx-toolbar-item-content > div {
+  overflow: visible;
+  width: 1000px;
+}
+
+.dx-texteditor.dx-editor-filled {
+  background-color: transparent !important;
+}
+
+.dx-texteditor.dx-editor-filled.dx-state-hover {
+  background-color: rgba(0,0,0,.04) !important;
+}
+
+.dx-texteditor.dx-editor-filled.dx-state-focused {
+  background-color: rgba(0,0,0,.04) !important;
+}
+
+.fuse-vertical-navigation-item-title {
+    font-size: 14px !important;
+}
+
+gridster {
+    background-color: transparent !important;
+    //background-image: url('/assets/img/home/background.png') !important;
+}
+gridster-item {
+    background-color: transparent !important;
+    //background-image: url('/assets/img/home/background.png') !important;
+}
+.gridster-content {
+    height: calc(100vh - 140px);
+    width: 100%
+}
+
+.my-full-screen-dialog .mat-dialog-container {
+  max-width: none;
+  width: 100vw;
+  height: calc(100vh - 40px);
+}
+
+.custom-content {
+  display: block;
+  margin: 0 -24px;
+  padding: 0 24px;
+  max-height: 90vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@-webkit-keyframes pulsate {
+  0% {
+    -webkit-transform: scale(0.1, 0.1);
+    opacity: 0.0;
+  }
+  50% {
+    opacity: 1.0;
+  }
+  100% {
+    -webkit-transform: scale(1.2, 1.2);
+    opacity: 0.0;
+  }
+}
+
+.fileuploader-container {
+  border: 1px solid #d3d3d3;
+  margin: 20px 20px 0 20px;
+}
+
+.chat-button-container {
+  visibility: hidden;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000
+}
+
+.chat-button-container .chat-button {
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+  width: 58px;
+  height: 58px;
+  cursor: pointer
+}
+
+.chat-button-container .chat-button.disabled {
+  display: none
+}
+
+.chat-button-container .chat-button:hover svg .background {
+  fill: #f05b41
+}
+
+.chat-button-container .chat-button svg .border {
+  fill: white
+}
+
+.chat-button-container .chat-button svg .background {
+  fill: #264d68
+}
+
+.chat-button-container .chat-button svg path, .chat-button-container .chat-button svg rect {
+  fill: white
+}
+
+
+.errorRow {
+  background-color: #ffe6e6;
+}
+
+.successRow {
+  background-color: #d5f0db;
+}
+
+.gps_ring {
+  border: 3px solid #fa391f;
+  -webkit-border-radius: 30px;
+  height: 18px;
+  width: 18px;
+  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation-iteration-count: infinite;
+}
+
+.mapinfo {
+  margin: 1px;
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  min-width: 200px;
+}
+
+.mapinfo h4 {
+  margin: 0 0 5px;
+  color: #777;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.mapinfo b {
+  margin: 0 0 5px;
+  color: #000000;
+  font-size: 16px;
+}
+
+.maplegend {
+  text-align: left;
+  line-height: 18px;
+  color: #555;
+}
+
+.maplegend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.show {
+  visibility: visible;
+}
+
+.map-container {
+  padding-top: 70%;
+}
+
+.hidePanelDataGrid .dx-datagrid-rowsview {
+  visibility: collapse;
+}
+
+.dxc-tooltip {
+  z-index: 20000;
+}
+
+.blue-snackbar {
+  background: #2196F3 !important;
+  font-weight: bold;
+}
+
+.green-snackbar {
+  background: #55b559 !important;
+  font-weight: bold;
+}
+
+.red-snackbar {
+  background: #B00020 !important;
+  font-weight: bold;
+}
+
+.flexExpand {
+  flex: 1 1 auto;
+}
+
+.flexSpaceBetween {
+  justify-content: space-between;
+}
+
+.demo-sidebar {
+  background-color: #fff;
+  padding: 2em 1em;
+  transition: background-color 0.15s;
+
+  &.ng-sidebar--opened.ng-sidebar--over {
+    box-shadow: 0 0 2.5em rgba(85, 85, 85, 0.5);
+  }
+
+}
+
+.radius-corners {
+    --b: 3px;   /* thickness of the border */
+    --c: #FF4F3B;   /* color of the border */
+    --w: 50px;  /* width of border */
+    --r: 19px;  /* radius */
+
+    padding: var(--b); /* space for the border */
+
+
+    &:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--c, #FF4F3B);
+        padding: var(--b);
+        border-radius: var(--r);
+        -webkit-mask: linear-gradient(0deg, #000 calc(2 * var(--b)), #0000 0) 50% var(--b)/calc(100% - 2 * var(--w)) 100% repeat-y,
+        linear-gradient(-90deg, #000 calc(2 * var(--b)), #0000 0) var(--b) 50%/100% calc(100% - 2 * var(--w)) repeat-x,
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+        -webkit-mask-composite: destination-out;
+        mask-composite: exclude;
+    }
+}
+
+// Mat-Calendar Custom Header Overrides
+.calendar-wrapper {
+.mat-calendar {
+    border: 1px solid #0D0D0D;
+    border-radius: 18px;
+
+.mat-calendar-content{
+    padding: 0 !important;
+.mat-calendar-table-header {
+    padding: 8px 20px;
+
+    tr:first-of-type {
+        background-color: #0D0D0D;
+        font-size: 12px !important;
+        color: #FFF;
+        th:first-child {
+            border-bottom-left-radius: 12px;
+        }
+
+        th:last-child {
+            border-bottom-right-radius: 12px;
+        }
+    }
+    .mat-calendar-table-header-divider {
+        display: none !important;
+    }
+}
+
+    .mat-calendar-body-cell-container, .mat-calendar-body-cell-content {
+        padding: 12px 24px !important;
+        border-radius: 32px !important;
+    }
+
+    .mat-calendar-body-label {
+        padding-top: 12px !important;
+        padding-bottom: 12px !important;
+    }
+}
+}
+}
+
+// Slick slider overrides
+.slick-prev, .slick-next {
+    height: 15px !important;
+    background-color: black !important;
+    background-repeat: no-repeat !important;
+    background-position: right !important;
+    background-size: cover !important;
+    opacity: 0.3 !important;
+    transition: opacity ease 0.3s !important;
+    &:before {
+        content: "" !important;
+    }
+    &:hover {
+        transition: opacity ease 0.3s !important;
+        opacity: 1 !important;
+    }
+}
+
+.slick-next {
+    background-image: url("/assets/icons/arrow-right.svg") !important;
+}
+
+.slick-prev {
+    background-image: url("/assets/icons/arrow-left.svg") !important;
+}
+
+.date-range-wrapper {
+    .mdc-icon-button {
+        svg {
+            display: none !important;
+        }
+    }
+    .mat-mdc-icon-button {
+        --mat-mdc-button-persistent-ripple-color: transparent !important;
+        --mat-mdc-button-ripple-color: transparent !important;
+    }
+    .mat-mdc-button-touch-target {
+        height: 24px !important;
+        width: 24px !important;
+    }
+}

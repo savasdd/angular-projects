@@ -1,0 +1,82 @@
+<div class="rounded-[20px] mx-auto mt-1 w-[99%] shadow-2xl grid grid-cols-4 gap-3 p-3 font-grotestk">
+    <div class="col-span-3 grid grid-cols-3 gap-3">
+        <div class="col-start-3">
+            <app-worker-card *ngIf="workerData" [workerData]="workerData"></app-worker-card>
+        </div>
+        <div class="col-span-3 grid grid-cols-2 gap-3">
+            <div class="flex flex-col gap-y-3 h-full">
+                <app-shift-schedule></app-shift-schedule>
+                <app-break-carousel-card *ngIf="breakProfileData"
+                                         [breakProfileData]="breakProfileData"></app-break-carousel-card>
+            </div>
+            <div>
+                <app-shift-charts></app-shift-charts>
+            </div>
+        </div>
+    </div>
+    <div class="col-start-4">
+
+        <section class="bg-white rounded-2xl shadow-xl flex flex-col justify-between gap-y-6">
+            <div
+                class="bg-black bg-[url('assets/images/card-bg.svg')] bg-cover bg-center rounded-2xl shadow-2xl p-6 text-white flex flex-col gap-y-6">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-white text-[32px]">Workers</h2>
+                    <button class="text-[14px]">Select All</button>
+                </div>
+                <div
+                    class="w-full transition-all border border-slate-400 rounded-xl py-3 px-4 placeholder:text-slate-400 focus:border-white focus:transition-all flex items-center justify-start gap-x-2">
+                    <label for="search"
+                           class="bg-[url('/assets/icons/search-line.svg')] bg-center bg-cover w-5 h-5"></label>
+                    <input id="search" type="search" placeholder="Search.." class="w-full"/>
+                </div>
+            </div>
+            <div class="px-6 overflow-auto max-h-[500px]">
+                <ul class="flex flex-col gap-y-2">
+                    <div *ngFor="let worker of workerDataSource">
+                        <li class="flex items-center justify-between py-1 px-3 border border-black border-opacity-50 rounded-xl hover:bg-[#0D0D0D] hover:transition-all group cursor-pointer"
+                            [ngClass]="+worker.id % 2 === 0 && 'bg-[#E0E0E0]'"
+                            [id]="worker.id"
+                            (click)="onWorkerClick($event)">
+                            <div class="flex items-center gap-x-2" [id]="worker.id">
+                                <img [src]="'assets/images/avatars/male-0'+worker.id+'.jpg'" class="w-10 rounded-md"
+                                     alt="Person"
+                                     [id]="worker.id"/>
+                                <div class="flex flex-col">
+                                    <span
+                                        [id]="worker.id"
+                                        class="text-black opacity-50 transition-all group-hover:transition-all  group-hover:text-white group-hover:text-opacity-90">{{worker.person.identityNumber}}</span>
+                                    <strong
+                                        [id]="worker.id"
+                                        class=" transition-all group-hover:transition-all group-hover:text-white">{{worker.person.fullName}}</strong>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-x-2" [id]="worker.id">
+                                <div
+                                    [id]="worker.id"
+                                    class="h-8 border-r border-black border-opacity-50 transition-all group-hover:border-white group-hover:border-opacity-40 group-hover:transition-all"></div>
+                                <button [id]="worker.id">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         stroke-width="1.5" stroke="currentColor"
+                                         class="w-6 h-6 transition-all group-hover:stroke-white group-hover:fill-white group-hover:transition-all"
+                                         [id]="worker.id">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                              d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                                              [id]="worker.id"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+            <div class="px-6 pb-6">
+                <button
+                    class="py-4 px-5 w-full flex items-center justify-center gap-x-3 border border-[#080808] rounded-xl shadow-xl">
+                    <img src="assets/icons/plus.svg" alt="Add Employee" class="w-5"/><span
+                    class="font-bold text-[16px] uppercase">New Worker</span></button>
+            </div>
+        </section>
+
+
+    </div>
+</div>

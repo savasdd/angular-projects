@@ -1,0 +1,112 @@
+<div id="container" *transloco="let t">
+    <dx-popup
+        maxWidth="60%"
+        maxHeight="70%"
+        [showTitle]="true"
+        [title]="t('worker.information',{name:workerLabel})"
+        [dragEnabled]="false"
+        [hideOnOutsideClick]="false"
+        [showCloseButton]="true"
+        [(visible)]="popupVisible">
+        <div *dxTemplate="let data of 'content'">
+            <dx-scroll-view width="100%" height="100%">
+                <div id="form-container">
+                    <mat-tab-group>
+                        <mat-tab label="{{'worker.profile'|transloco|localeTitleCase}}">
+                            <div>
+                                <dx-scroll-view width="100%" height="100%">
+                                    <dx-form id="form" [colCount]="1">
+                                        <dxi-item itemType="group"
+                                                  caption="{{'profile.list'|transloco|localeTitleCase}}"
+                                                  class="border shadow-lg mt-2">
+                                            <div>
+                                                <dx-data-grid #profileDataGrid
+                                                              [columnAutoWidth]="false"
+                                                              [dataSource]="profileDataSource"
+                                                              [showRowLines]="true"
+                                                              [masterDetail]="{autoExpandAll: false, enabled: true, template: 'detail' }"
+                                                              [rowAlternationEnabled]="true">
+
+                                                    <dxi-column dataField="id" dataType="number" caption="ID"
+                                                                width="4rem" [visible]="false"></dxi-column>
+                                                    <dxi-column dataField="name" dataType="string"
+                                                                caption="{{'profile'|transloco|localeTitleCase}}"></dxi-column>
+                                                    <dxi-column type="buttons"
+                                                                caption="{{'add'|transloco|localeTitleCase}}"
+                                                                [width]="110">
+                                                        <dxi-button
+                                                            hint="{{'add'|transloco|localeTitleCase}}"
+                                                            icon="add"
+                                                            [onClick]="addProfile"
+                                                        ></dxi-button>
+                                                    </dxi-column>
+                                                    <dxo-paging [pageSize]="5"></dxo-paging>
+
+                                                    <div *dxTemplate="let item of 'detail'">
+                                                        <mat-tab-group>
+                                                            <mat-tab
+                                                                label="{{'profile.calendar'|transloco|localeTitleCase}}">
+                                                                <div class="master-detail-caption" *ngIf="true">
+                                                                    <app-detail-profile-grid
+                                                                        [key]="item"></app-detail-profile-grid>
+                                                                </div>
+                                                            </mat-tab>
+
+                                                            <mat-tab
+                                                                label="{{'profile.break'|transloco|localeTitleCase}}">
+                                                                <div class="master-detail-caption" *ngIf="true">
+                                                                    <app-detail-break-grid
+                                                                        [key]="item"></app-detail-break-grid>
+                                                                </div>
+                                                            </mat-tab>
+                                                        </mat-tab-group>
+                                                    </div>
+                                                </dx-data-grid>
+                                            </div>
+                                        </dxi-item>
+
+                                        <dxi-item itemType="group"
+                                                  caption="{{'staff.profile.list'|transloco|localeTitleCase}}"
+                                                  class="border shadow-lg mt-2">
+                                            <div>
+                                                <dx-data-grid #workerProfileDataGrid
+                                                              [columnAutoWidth]="false"
+                                                              [dataSource]="workerProfileDataSource"
+                                                              [showRowLines]="true"
+                                                              [rowAlternationEnabled]="true">
+
+                                                    <dxi-column dataField="id" dataType="number" caption="ID"
+                                                                width="4rem" [visible]="false"></dxi-column>
+                                                    <dxi-column dataField="profile.name" dataType="string"
+                                                                caption="{{'profile'|transloco|localeTitleCase}}"></dxi-column>
+                                                    <dxi-column dataField="profile.schedularParam.name"
+                                                                dataType="string"
+                                                                caption="{{'profile.schedule'|transloco|localeTitleCase}}"></dxi-column>
+                                                    <dxi-column dataField="profile.breakParam.name"
+                                                                dataType="string"
+                                                                caption="{{'break.profile'|transloco|localeTitleCase}}"></dxi-column>
+                                                    <dxi-column type="buttons"
+                                                                caption="{{'delete'|transloco|localeTitleCase}}"
+                                                                [width]="110">
+                                                        <dxi-button
+                                                            hint="{{'delete'|transloco|localeTitleCase}}"
+                                                            icon="trash"
+                                                            [onClick]="deleteProfile"
+                                                        ></dxi-button>
+                                                    </dxi-column>
+                                                    <dxo-paging [pageSize]="5"></dxo-paging>
+
+                                                </dx-data-grid>
+                                            </div>
+                                        </dxi-item>
+                                    </dx-form>
+                                </dx-scroll-view>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+
+            </dx-scroll-view>
+        </div>
+    </dx-popup>
+</div>

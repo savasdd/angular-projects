@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="13" viewBox="0 0 16 13">
+  <g id="Group_627" data-name="Group 627" transform="translate(-126 -863.5)" opacity="0.5">
+    <g id="burger-line" transform="translate(126.5 864)">
+      <path id="Path_472" data-name="Path 472" d="M11.75,14l2.534-2.534A1.591,1.591,0,0,1,15.409,11H15.5A1.5,1.5,0,0,1,17,12.5h0A1.5,1.5,0,0,1,15.5,14H3.5A1.5,1.5,0,0,1,2,12.5H2A1.5,1.5,0,0,1,3.5,11H6.886a4.5,4.5,0,0,1,3.181,1.318Zm-9,0h13.5v1.5A2.25,2.25,0,0,1,14,17.75H5A2.25,2.25,0,0,1,2.75,15.5Z" transform="translate(-2 -5.75)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <path id="Path_473" data-name="Path 473" d="M9.763,4C6.3,4,3.439,5.317,3.056,8.5a.687.687,0,0,0,.706.75h12a.687.687,0,0,0,.706-.75C16.087,5.317,13.23,4,9.763,4ZM6.014,7h0m6-.75h0M9.764,7h0" transform="translate(-2.263 -4)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

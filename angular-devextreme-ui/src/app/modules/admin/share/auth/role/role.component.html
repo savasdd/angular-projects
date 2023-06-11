@@ -1,0 +1,216 @@
+<div
+    class="flex flex-col sm:flex-row md:flex-col flex-auto justify-between py-8 px-6 md:px-8 border-b bg-card dark:bg-transparent">
+    <div>
+        <div class="text-2xl font-extrabold tracking-tight">{{ 'role.list' | transloco | localeTitleCase }}</div>
+        <div>
+            <dx-data-grid #roleDataGrid
+                          [columnAutoWidth]="false"
+                          [dataSource]="roleDataSource"
+                          [showRowLines]="true"
+                          (onEditorPreparing)="onEditorPreparing($event)"
+                          (onInitNewRow)="onInitNewRow($event)"
+                          (onRowPrepared)="onRowPrepared($event)">
+                <dxo-editing
+                    mode="popup"
+                    [allowUpdating]="sessionService.isAuth('roleUpdate')"
+                    [allowDeleting]="sessionService.isAuth('roleDelete')"
+                    [allowAdding]="sessionService.isAuth('roleSave')">
+                    <dxo-popup title="{{'role.information'|transloco|localeTitleCase}}" [showTitle]="true"></dxo-popup>
+                    <dxo-form>
+                        <dxi-item itemType="group" caption="{{'general.information' |transloco | localeTitleCase}}">
+                            <dxi-item dataField="name"
+                                      [label]="{text: 'title' | transloco | localeTitleCase}"></dxi-item>
+                            <dxi-item dataField="description"
+                                      [label]="{text: 'description' | transloco | localeTitleCase}"></dxi-item>
+                        </dxi-item>
+                        <dxi-item itemType="group"
+                                  caption="{{'role.permission.information' |transloco |localeTitleCase}}">
+                            <dxi-item dataField="roles" [label]="{visible: false}"></dxi-item>
+                        </dxi-item>
+                        <dxi-item itemType="group"
+                                  caption="{{'authority.permission.information' |transloco | localeTitleCase}}"
+                                  [colSpan]="2">
+                            <dxi-item dataField="roleAuthorities" [label]="{visible: false}"></dxi-item>
+                        </dxi-item>
+                    </dxo-form>
+                </dxo-editing>
+                <dxi-column dataField="name" caption="{{'name' | transloco |localeTitleCase}}" dataType="string"
+                            sortOrder="asc">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-column>
+
+                <dxi-column dataField="description" caption="{{'description' | transloco | localeTitleCase}}">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-column>
+
+                <dxi-column dataField="roleAuthorities" caption="{{'permissions' |transloco |localeTitleCase}}"
+                            [visible]="false"
+                            editCellTemplate="cellAuthoritiesEditTemplate">
+                </dxi-column>
+                <div *dxTemplate="let d of 'cellAuthoritiesEditTemplate'">
+                    <dx-data-grid #authorityDataGrid [dataSource]="getAuthoritiesDataSource(d)"
+                                  [showRowLines]="true">
+                        <dxo-editing
+                            [allowUpdating]="false"
+                            [allowDeleting]="false"
+                            [allowAdding]="false">
+                        </dxo-editing>
+
+                        <dxo-sorting mode="none"></dxo-sorting>
+                        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+                        <dxo-paging [pageSize]="10"></dxo-paging>
+                        <dxo-pager
+                            [showPageSizeSelector]="true"
+                            [allowedPageSizes]="[5, 10, 20, 100, 200]"
+                            [showInfo]="true">
+                        </dxo-pager>
+                        <dxi-column dataField="authority.groupName"
+                                    caption="{{'authority.group' |transloco |localeTitleCase}}"
+                                    [groupIndex]="0" sortOrder="asc"></dxi-column>
+                        <dxi-column dataField="selected" caption="{{'state' |transloco | localeTitleCase}}"
+                                    datatype="boolean"
+                                    [width]="120" cellTemplate="isSelectTemplate">
+                            <dxo-header-filter [dataSource]="isSelectDataSource"
+                                               [visible]="true"></dxo-header-filter>
+                        </dxi-column>
+                        <div *dxTemplate="let d of 'isSelectTemplate'">
+                            <dx-switch (onValueChanged)="onAuthorityChanged($event, d)" [width]="50"
+                                       [value]="d.data.selected"></dx-switch>
+                        </div>
+
+                        <dxi-column dataField="authority.description" sortOrder="asc"
+                                    [allowEditing]="false" [allowFiltering]="false"
+                                    caption="{{'name'| transloco| localeTitleCase}}">
+                        </dxi-column>
+
+                        <dxo-search-panel
+                            [highlightCaseSensitive]="true"
+                            [highlightSearchText]="true"
+                            [searchVisibleColumnsOnly]="true"
+                            [visible]="true"
+                            [width]="240">
+                        </dxo-search-panel>
+                    </dx-data-grid>
+                </div>
+
+                <dxi-column dataField="roles" caption="{{'rollers'|transloco |localeTitleCase}}" [visible]="false"
+                            editCellTemplate="cellRolesEditTemplate">
+                </dxi-column>
+                <div *dxTemplate="let d of 'cellRolesEditTemplate'">
+                    <dx-data-grid [dataSource]="(d.value)?d.value:[]"
+                                  [showRowLines]="true"
+                                  (onRowInserted)="onRolesInsertedUpdated($event, d)"
+                                  (onRowUpdated)="onRolesInsertedUpdated($event, d)"
+                                  (onRowRemoved)="onRolesInsertedUpdated($event, d)">
+                        <dxo-editing
+                            mode="row"
+                            [allowUpdating]="true"
+                            [allowDeleting]="true"
+                            [allowAdding]="true">
+                        </dxo-editing>
+                        <dxo-search-panel [visible]="true"></dxo-search-panel>
+                        <dxo-paging [pageSize]="10"></dxo-paging>
+                        <dxo-pager
+                            [showPageSizeSelector]="true"
+                            [allowedPageSizes]="[5, 10, 20]"
+                            [showInfo]="true">
+                        </dxo-pager>
+                        <dxi-column dataField="id" caption="{{'role.name' | transloco |localeTitleCase}}">
+                            <dxo-lookup
+                                [dataSource]="rolesDataSource"
+                                valueExpr="id"
+                                displayExpr="description">
+                            </dxo-lookup>
+                            <dxi-validation-rule type="required"></dxi-validation-rule>
+                        </dxi-column>
+                    </dx-data-grid>
+                </div>
+                <dxi-column type="buttons" [width]="110" caption="İşlem">
+                    <dxi-button name="edit"></dxi-button>
+                    <dxi-button name="delete"></dxi-button>
+                </dxi-column>
+
+                <dxi-column dataField="operationId" caption="Kopyala"
+                            dataType="text" width="5%"
+                            cellTemplate="operationTemplate1"
+                            [allowSorting]="false" [allowFiltering]="false"></dxi-column>
+                <div style="text-align: center;" *dxTemplate="let data of 'operationTemplate1'">
+                    <dx-button icon="copy" visible="false"
+                               (click)="callRoleOperationListPopup(data)"></dx-button>
+                </div>
+
+                <dxo-search-panel
+                    [highlightSearchText]="true"
+                    [visible]="true"
+                    [width]="240">
+                </dxo-search-panel>
+
+                <dxo-load-panel [enabled]="true"></dxo-load-panel>
+
+                <dxo-paging [pageSize]="20"></dxo-paging>
+                <dxo-pager
+                    [showPageSizeSelector]="true"
+                    [allowedPageSizes]="[5, 10, 20]"
+                    [showInfo]="true">
+                </dxo-pager>
+
+                <dxo-header-filter
+                    [visible]=false>
+                </dxo-header-filter>
+
+                <dxo-remote-operations
+                    [sorting]="false"
+                    [paging]="false"
+                    [filtering]="false">
+                </dxo-remote-operations>
+            </dx-data-grid>
+
+            <div id="container" *transloco="let t">
+                <dx-popup
+                    [width]="400"
+                    [height]="250"
+                    [showTitle]="true"
+                    title="Rol Kopyalama"
+                    [dragEnabled]="false"
+                    [hideOnOutsideClick]="false"
+                    [showCloseButton]="true"
+                    [(visible)]="popupVisible">
+                    <div *dxTemplate="let data of 'content'">
+                        <div id="form-container">
+
+                            <dx-form id="form">
+                                <dxi-item itemType="group">
+                                    <div class="dx-field">
+                                        <dx-text-box style="width: 100%" class="dx-field-value" [value]="rolNameValue"
+                                                     (onValueChanged)="onRolNameChanged($event)"
+                                                     placeholder="Rol Adı">
+                                            <dxi-validation-rule type="required"></dxi-validation-rule>
+                                        </dx-text-box>
+                                    </div>
+                                </dxi-item>
+
+                                <dxi-item itemType="group" [colCount]="0">
+                                    <dxi-item itemType="group">
+                                        <div class="dx-field">
+                                            <dx-button
+                                                style="background-color: #8ebad2"
+                                                stylingMode="contained"
+                                                text="Kaydet"
+                                                type="default"
+                                                height="1.7rem"
+                                                width="6rem"
+                                                (onClick)="insert()">
+                                            </dx-button>
+                                        </div>
+                                    </dxi-item>
+                                </dxi-item>
+                            </dx-form>
+
+                        </div>
+                    </div>
+                </dx-popup>
+            </div>
+        </div>
+    </div>
+</div>

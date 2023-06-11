@@ -1,0 +1,79 @@
+<div
+    class="flex flex-col sm:flex-row md:flex-col flex-auto justify-between py-8 px-6 md:px-8 border-b bg-card dark:bg-transparent">
+    <div>
+        <div class="text-2xl font-extrabold tracking-tight">{{ 'profile' | transloco | localeTitleCase }}</div>
+        <div>
+            <form>
+                <dx-form [formData]="profileDataSource"
+                         validationGroup="userData"
+                         [showValidationSummary]="true" [colCount]="2">
+                    <dxi-item itemType="group" caption="{{'user.information'|transloco|localeTitleCase}}">
+                        <dxi-item dataField="oldPassword" caption="{{'password'|transloco|localeTitleCase}}"
+                                  [label]="{text:'old.password'|transloco|localeTitleCase}"
+                                  [editorOptions]="{mode: 'password'}"></dxi-item>
+                        <dxi-item dataField="password" caption="{{'password'|transloco|localeTitleCase}}"
+                                  [label]="{text:'new.password'|transloco|localeTitleCase}"
+                                  [editorOptions]="{mode: 'password'}"></dxi-item>
+                        <dxi-item dataField="newPassword" caption="{{'passowrd'|transloco|localeTitleCase}}"
+                                  [label]="{text:'new.password.again'|transloco|localeTitleCase}"
+                                  [editorOptions]="{mode: 'password'}">
+                            <dxi-validation-rule
+                                type="compare"
+                                [comparisonTarget]="passwordComparison"
+                                message="{{'new.password.validation'|transloco|localeTitleCase}}">
+                            </dxi-validation-rule>
+                        </dxi-item>
+
+                    </dxi-item>
+                    <dxi-item itemType="group" caption="">
+                        <dxi-item dataField="person.avatarId" [label]="{visible:false}">
+                            <div style="width: 100%; padding-right: 20px; text-align: right;">
+                                <img style="width: 120px;"
+                                     src="{{profileDataSource.personAvatarId? baseUrl + 'binaryContents/getPublicImage/' + profileDataSource.personAvatarId : 'assets/images/avatars/avatar.png'}}"
+                                     alt="Resim">
+                            </div>
+                        </dxi-item>
+
+                        <dxi-item dataField="avatar" [label]="{visible:false}">
+                            <dx-file-uploader
+                                selectButtonText="{{'select.image'|transloco|localeTitleCase}}"
+                                labelText="{{'drop.image'|transloco|localeTitleCase}}"
+                                accept="image/*"
+                                uploadMode="useForm"
+                                (onValueChanged)="onPhotoValueChanged($event)">
+                            </dx-file-uploader>
+                        </dxi-item>
+
+                        <dxi-item itemType="group" caption="{{'contact.information'|transloco|localeTitleCase}}">
+                            <dx-data-grid [dataSource]="profileDataSource.personContacts">
+                                <dxo-editing
+                                    mode="row">
+                                </dxo-editing>
+                                <dxi-column dataField="contactType"
+                                            caption="{{'contact.type'|transloco|localeTitleCase}}"
+                                            width="200">
+                                    <dxo-lookup
+                                        [dataSource]="constantService.EContactType"
+                                        valueExpr="value"
+                                        displayExpr="label">
+                                    </dxo-lookup>
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                                </dxi-column>
+                                <dxi-column dataField="label" caption="{{'value'|transloco|localeTitleCase}}">
+                                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                                </dxi-column>
+                            </dx-data-grid>
+                        </dxi-item>
+
+                    </dxi-item>
+                </dx-form>
+
+                <div style="text-align: right;">
+                    <button type="submit" class="btn btn-success btn-fill btn-wd"
+                            (click)="updateProfile()">{{'change'|transloco|uppercase}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

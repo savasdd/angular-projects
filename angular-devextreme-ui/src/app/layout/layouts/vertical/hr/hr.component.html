@@ -1,0 +1,62 @@
+<!-- Loading bar -->
+<fuse-loading-bar></fuse-loading-bar>
+
+<fuse-vertical-navigation
+    class="print:hidden text-white rounded-2xl">
+    <!-- Navigation header hook -->
+    <ng-container fuseVerticalNavigationContentHeader>
+        <!-- Logo -->
+        <div class="flex items-center justify-center h-20 mt-3 mb-4 cursor-pointer"
+             [routerLink]="['/signed-in-redirect']">
+            <img
+                class="w-20"
+                src="assets/icons/hr-logo.svg"
+                alt="HR">
+        </div>
+    </ng-container>
+</fuse-vertical-navigation>
+
+<!-- Wrapper -->
+<div class="flex flex-col flex-auto w-full min-w-0">
+
+    <!-- Header -->
+    <div
+        class="relative flex justify-evenly items-center w-[99%] rounded-2xl px-2 mx-auto h-16 z-49 shadow-xl mt-2 dark:shadow-none dark:border-b bg-card dark:bg-transparent print:hidden">
+        <div class="flex items-center gap-x-3">
+            <!-- Navigation toggle button -->
+            <button
+                class="w-10 h-10"
+                mat-icon-button
+                (click)="toggleNavigation('mainNavigation')">
+                <mat-icon [svgIcon]="'heroicons_outline:menu'"
+                          class="text-white bg-[#777EF3] rounded-full p-1"></mat-icon>
+            </button>
+            <strong class="text-xl font-normal">{{ 'hello.title' | transloco | localeTitleCase }}
+                , {{user ? user : 'hello.title.name'|transloco|localeTitleCase}}</strong>
+            <div class="border-r border-slate-400 h-5"></div>
+            <strong
+                class="text-xl">{{userDepartment ? userDepartment : 'hello.title.company'|transloco|localeTitleCase}}</strong>
+        </div>
+
+        <!-- Components -->
+        <div
+            class="flex items-center p-2 ml-auto space-x-0.5 sm:space-x-2 bg-gradient-to-r from-[#272727] to-[#777EF3] rounded-2xl">
+            <fuse-fullscreen></fuse-fullscreen>
+            <search [appearance]="'bar'"></search>
+            <shortcuts></shortcuts>
+            <notifications></notifications>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="flex flex-col flex-auto">
+        <router-outlet *ngIf="true"></router-outlet>
+    </div>
+
+    <!-- Footer -->
+    <div
+        class="relative flex flex-0 items-center justify-start w-[99%] mx-auto bg-[#272727] rounded-full h-[42px] px-4 md:px-6 z-49 border-t dark:bg-transparent print:hidden">
+        <span class="font-medium text-white">HR &copy; {{currentYear}}</span>
+    </div>
+
+</div>

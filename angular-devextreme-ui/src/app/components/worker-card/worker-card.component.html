@@ -1,0 +1,30 @@
+<!--    Employee Card-->
+<section class="p-4 rounded-3xl border border-[#0D0D0D] flex flex-col gap-y-2">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-x-2">
+            <img [src]="'assets/images/avatars/male-0'+workerGetData[0].id+'.jpg'" alt="person" class="w-10 rounded-md" />
+            <div class="flex flex-col items-start justify-end">
+                <span class="text-[14px] text-black text-opacity-40">{{workerGetData[0].person.identityNumber}}</span>
+                <strong class="text-[16px] text-black">{{workerGetData[0].person.fullName}}</strong>
+            </div>
+        </div>
+        <div class="flex items-center gap-x-1">
+            <span class="text-[14px] font-medium">At work</span>
+            <img src="assets/icons/ellipse.svg" alt="status" class="w-4" />
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-x-3">
+        <ul class="flex flex-col gap-y-1">
+            <li class="flex items-center justify-between rounded-xl border border-[#0D0D0D] py-0.5 px-2 min-w-[180px]"><span class="font-thin text-[14px] tracking-wider">Entry</span><strong class="text-xl tracking-wider">09:17</strong></li>
+            <li class="flex items-center justify-between rounded-xl border border-[#0D0D0D] py-0.5 px-2 min-w-[180px]"><span class="font-thin text-[14px] tracking-wider">Break</span><strong class="text-xl tracking-wider">01:18</strong></li>
+            <li class="flex items-center justify-between rounded-xl border border-[#0D0D0D] py-0.5 px-2 min-w-[180px]"><span class="font-thin text-[14px] tracking-wider">Check-out</span><strong class="text-xl tracking-wider">-</strong></li>
+        </ul>
+        <div class="bg-black bg-[url('assets/images/working-time-bg.svg')] bg-cover bg-center py-2 px-3 rounded-xl h-full flex flex-col items-center justify-evenly">
+            <h3 class="m-0 text-[16px] tracking-widest font-thin text-white">Working Time</h3>
+            <div class="flex">
+                <strong class="text-[40px] text-[#777EF4] font-normal tracking-wider">07<span class="text-xl opacity-40">h</span></strong>
+                <strong class="text-[40px] text-[#777EF4] font-normal tracking-wider"> 32<span class="text-xl opacity-40">m</span></strong>
+            </div>
+        </div>
+    </div>
+</section>

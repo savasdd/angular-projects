@@ -1,0 +1,14 @@
+button.mat-menu-item{
+    font-weight: bold;
+}
+::ng-deep .dx-form .dx-texteditor-input {
+    font-weight: bold;
+    font-size: 14px;
+    color: darkslateblue;
+}
+
+::ng-deep .master-detail-caption {
+    padding: 0 0 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+}

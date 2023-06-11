@@ -1,0 +1,39 @@
+<!--    Shift schedule-->
+<section class="p-4 rounded-3xl shadow-2xl h-full">
+    <div class="flex items-center justify-between pb-1 border-b border-black border-opacity-20">
+        <h2 class="m-0 text-4xl text-black font-medium">Shifts</h2>
+        <div class="flex items-center gap-x-2 bg-[#0D0D0D] text-white py-2 px-3 rounded-xl date-range-wrapper">
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Start date" />
+                <input matEndDate placeholder="End date" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle class="w-8 h-8 bg-[url('/assets/icons/datepicker-arrow.svg')] bg-center bg-contain bg-no-repeat"  [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </div>
+    </div>
+    <div>
+        <div class="w-full table text-left mt-3">
+            <div class="table-header-group">
+                <div class="table-row">
+                    <!--                    Empty tHead for days-->
+                    <th class="table-cell"></th>
+                    <th class="table-cell font-thin text-[14px] tracking-widest px-3">Entry</th>
+                    <th class="table-cell font-thin text-[14px] tracking-widest px-3">Check-out</th>
+                    <th class="table-cell font-thin text-[14px] tracking-widest px-3">Location</th>
+                </div>
+            </div>
+            <div class="table-row-group">
+                <ng-container *ngFor="let element of shiftTableElements">
+                    <div class="table-row" [ngClass]="element.id % 2 !== 0 && 'bg-[#E0E0E0]'">
+                        <td class="table-cell relative right-1 p-1.5 rounded-xl bg-black text-white text-[12px] text-center">{{element.day}}</td>
+                        <td class="table-cell py-1.5 px-3 text-[16px] font-medium tracking-widest border-t border-b border-l border-black border-opacity-50 rounded-l-xl">{{element['entryDate']}}</td>
+                        <td class="table-cell py-1.5 px-3 text-[16px] font-medium tracking-widest border-t border-b border-black border-opacity-50"><span class="h-5 border-l border-black border-opacity-50 relative right-2"></span>{{element['checkOutDate']}}</td>
+                        <td class="table-cell py-1.5 px-3 text-[16px] font-medium border-t border-b border-r border-black border-opacity-50 rounded-r-xl relative"><span class="h-5 border-l border-black border-opacity-50 relative right-2"></span>{{element.location}}</td>
+                    </div>
+                    <!--                        divider-->
+                    <div class="h-[4px]"></div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</section>

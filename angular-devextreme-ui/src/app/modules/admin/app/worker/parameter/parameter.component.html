@@ -1,0 +1,87 @@
+<div
+    class="flex flex-col sm:flex-row md:flex-col flex-auto justify-between py-8 px-6 md:px-8 border-b bg-card dark:bg-transparent">
+    <div>
+        <div class="text-2xl font-extrabold tracking-tight">{{ 'parameter.list' | transloco | localeTitleCase }}</div>
+        <dx-data-grid #parameterDataGrid
+                      [columnAutoWidth]="false"
+                      [dataSource]="dataSource"
+                      [showRowLines]="true"
+                      [rowAlternationEnabled]="true">
+
+            <dxo-editing
+                mode="popup"
+                [allowUpdating]="true"
+                [allowDeleting]="true"
+                [allowAdding]="true"
+                [useIcons]="true">
+
+                <dxo-popup title="{{'parameter.detail' | transloco|localeTitleCase}}"
+                           [showTitle]="true"
+                           [width]="700"
+                           [height]="450">
+                </dxo-popup>
+                <dxo-form>
+                    <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+                        <dxi-item dataField="name">
+                            <dxi-validation-rule type="required"></dxi-validation-rule>
+                        </dxi-item>
+                        <dxi-item dataField="code">
+                            <dxi-validation-rule type="required"></dxi-validation-rule>
+                        </dxi-item>
+                        <dxi-item
+                            dataField="description"
+                            editorType="dxTextArea"
+                            [colSpan]="2"
+                            [editorOptions]="{ height: 100 }"
+                        >
+                        </dxi-item>
+                    </dxi-item>
+                </dxo-form>
+            </dxo-editing>
+
+            <dxo-selection mode="single"></dxo-selection>
+            <dxi-column dataField="id" dataType="number" caption="ID" width="4rem"></dxi-column>
+            <dxi-column dataField="name" dataType="string" caption="{{'parameter'|transloco|localeTitleCase}}"></dxi-column>
+            <dxi-column dataField="code" dataType="string" caption="{{'code'|transloco|localeTitleCase}}"></dxi-column>
+            <dxi-column dataField="user.username" dataType="string" caption="{{'transacter' | transloco|localeTitleCase}}"></dxi-column>
+            <dxi-column dataField="description" dataType="string" caption="{{'description' | transloco |localeTitleCase}}"
+                        width="15rem"></dxi-column>
+
+            <dxi-column type="buttons" [width]="110">
+                <dxi-button name="edit"></dxi-button>
+                <dxi-button name="delete"></dxi-button>
+            </dxi-column>
+
+            <dxo-search-panel
+                [visible]="true"
+                [width]="240"
+            >
+            </dxo-search-panel>
+
+            <dxo-load-panel [enabled]="true"></dxo-load-panel>
+
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager
+                [showPageSizeSelector]="true"
+                [allowedPageSizes]="[5,10, 20, 50, 100]"
+                [showInfo]="true">
+            </dxo-pager>
+
+            <dxo-header-filter
+                [visible]=false>
+            </dxo-header-filter>
+            <dxo-filter-row
+                [visible]="false">
+            </dxo-filter-row>
+
+            <dxo-remote-operations
+                [sorting]="true"
+                [paging]="true"
+                [filtering]="true">
+            </dxo-remote-operations>
+
+        </dx-data-grid>
+        <div>
+        </div>
+    </div>
+</div>

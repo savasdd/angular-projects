@@ -1,0 +1,53 @@
+<dx-drop-down-box #treeViewDropdownBox
+                  [(opened)]="isDropDownBoxOpened"
+                  [(value)]="itemValue"
+                  valueExpr="id"
+                  displayExpr="name"
+                  [showClearButton]="true"
+                  (onValueChanged)="showClearButton($event)"
+                  [dataSource]="departmentDataSource">
+
+    <dxo-drop-down-options [onShown]="onPopupShown"
+                           [title]="title"
+                           [showTitle]="true"
+                           [fullScreen]="true"
+                           [container]="container"
+                           [showCloseButton]="true">
+    </dxo-drop-down-options>
+
+    <!--  [focusedRowKey]="itemValue ? itemValue : 0"-->
+    <div *dxTemplate="let data of 'content'">
+        <dx-tree-list #dxDropdownTreeList style="height: calc(100vh - 150px);"
+                      [dataSource]="departmentDataSource"
+                      keyExpr="id"
+                      parentIdExpr="parent.id"
+                      [remoteOperations]="{filtering: true, sorting: true, grouping: true}"
+                      hasItemsExpr="hasItems"
+                      [rootValue]="rootValue"
+                      [cacheEnabled]="true"
+                      filterMode="fullBranch"
+                      [focusedRowEnabled]="true"
+                      (onFocusedRowChanged)="onFocusedRowChanged($event)"
+                      (onRowExpanding)="onRowExpanding($event)"
+                      (onRowCollapsing)="onRowExpanding($event)"
+                      (onRowClick)="onRowClick($event)">
+            <dxo-search-panel [visible]="true" [width]="600" [text]="searchText"></dxo-search-panel>
+            <dxo-scrolling
+                    mode="standard">
+            </dxo-scrolling>
+            <dxo-paging
+                    [enabled]="true"
+                    [pageSize]="20">
+            </dxo-paging>
+            <dxo-pager
+                    [showPageSizeSelector]="true"
+                    [allowedPageSizes]="[20, 50, 100]"
+                    [showInfo]="true">
+            </dxo-pager>
+
+            <dxi-column dataField="name" caption="{{'department.name.tree' |transloco | localeTitleCase}}" sortOrder="asc"></dxi-column>
+            <dxi-column dataField="departmentType.name" caption="{{'department.type' |transloco | localeTitleCase}}" [width]="250"
+                        [allowSearch]="false"></dxi-column>
+        </dx-tree-list>
+    </div>
+</dx-drop-down-box>

@@ -1,0 +1,84 @@
+<div id="data-grid1" class="border shadow-lg mt-2">
+    <dx-form id="form" style="padding: 0.8rem">
+        <dxi-item itemType="group" cssClass="first-group" [colCount]="7">
+            <dxi-item itemType="group">
+                <dx-check-box [value]="isMonday" [text]="DaysEnum.isMonday"
+                              (onValueChanged)="onMondayChanged($event)"></dx-check-box>
+            </dxi-item>
+            <dxi-item itemType="group">
+                <dx-check-box [value]="isTuesday" [text]="DaysEnum.isTuesday"
+                              (onValueChanged)="onTuesdayChanged($event)"></dx-check-box>
+            </dxi-item>
+            <dxi-item itemType="group">
+                <dx-check-box [value]="isWednesday" [text]="DaysEnum.isWednesday"
+                              (onValueChanged)="onWednesdayChanged($event)"></dx-check-box>
+            </dxi-item>
+            <dxi-item itemType="group">
+                <dx-check-box [value]="isThursday" [text]="DaysEnum.isThursday"
+                              (onValueChanged)="onThursdayChanged($event)"></dx-check-box>
+            </dxi-item>
+            <dxi-item itemType="group">
+                <dx-check-box [value]="isFriday" [text]="DaysEnum.isFriday"
+                              (onValueChanged)="onFridayChanged($event)"></dx-check-box>
+            </dxi-item>
+            <dxi-item itemType="group">
+                <dx-check-box [value]="isSaturday" [text]="DaysEnum.isSaturday"
+                              (onValueChanged)="onSaturdayChanged($event)"></dx-check-box>
+            </dxi-item>
+            <dxi-item itemType="group">
+                <dx-check-box [value]="isSunday" [text]="DaysEnum.isSunday"
+                              (onValueChanged)="onSundayChanged($event)"></dx-check-box>
+            </dxi-item>
+        </dxi-item>
+
+
+        <dxi-item itemType="group">
+            <dx-form id="form2">
+                <dxi-item itemType="group" cssClass="second-group" [colCount]="4">
+                    <dxi-item itemType="group">
+                        <div class="dx-fieldset">
+                            <div class="dx-field">
+                                <dx-date-box [value]="fullTimeStart" type="datetime"
+                                             (onValueChanged)="onStartTimeChanged($event)"
+                                             placeholder="{{'start.time'|transloco|localeTitleCase}}"></dx-date-box>
+                            </div>
+                        </div>
+                    </dxi-item>
+
+                    <dxi-item itemType="group">
+                        <div class="dx-fieldset">
+                            <div class="dx-field">
+                                <dx-date-box [value]="fullTimeEnd" type="datetime"
+                                             (onValueChanged)="onEndedTimeChanged($event)"
+                                             placeholder="{{'end.time'|transloco|localeTitleCase}}"></dx-date-box>
+                            </div>
+                        </div>
+                    </dxi-item>
+
+                    <dxi-item itemType="group">
+                        <div class="dx-fieldset">
+                            <div class="dx-field">
+                                <dx-button
+                                    style="background-color: #8ebad2"
+                                    stylingMode="contained"
+                                    icon="save"
+                                    text="Kaydet"
+                                    type="default"
+                                    (onClick)="insert()">
+                                </dx-button>
+                            </div>
+                        </div>
+                    </dxi-item>
+                </dxi-item>
+            </dx-form>
+        </dxi-item>
+    </dx-form>
+
+    <dx-form id="form3" style="margin-left: 0.3rem">
+        <dxi-item itemType="group" cssClass="first-group" [colCount]="4">
+            <dxi-item itemType="group">
+                <dx-radio-group [items]="priorities" [value]="isvalid"></dx-radio-group>
+            </dxi-item>
+        </dxi-item>
+    </dx-form>
+</div>

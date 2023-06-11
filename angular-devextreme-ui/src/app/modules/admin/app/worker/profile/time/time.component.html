@@ -1,0 +1,192 @@
+<div id="container" *transloco="let t">
+    <dx-popup
+        maxWidth="55%"
+        height="900"
+        [showTitle]="true"
+        [title]="t('schedular.title',{name:dataLabel})"
+        [dragEnabled]="false"
+        [hideOnOutsideClick]="false"
+        [showCloseButton]="true"
+        (onHiding)="onHiding($event)"
+        [(visible)]="popupVisible">
+        <div *dxTemplate="let data of 'content'">
+            <dx-scroll-view width="100%" height="100%">
+                <div id="form-container">
+                    <dxi-item itemType="group" [colSpan]="4">
+                        <mat-card>
+                            <mat-card-content id="cardId">
+                                <strong>Zamanlayıcı Tipine Göre, Tarih Alanları Girilir ve Kayıt Edilir. En Son
+                                    <u>GEÇERLİ PROFİL OLARAK UYGULA</u> Butonu ile Profil Aktif Edilir.
+                                    <u>ÖZEl ÇİZELGE OLUŞTUR</u> Seçeneği için Kaydet İşlemi Yapılmalıdır.
+                                </strong>
+                            </mat-card-content>
+                        </mat-card>
+                    </dxi-item>
+
+                    <mat-tab-group>
+                        <mat-tab label="{{'profil.schedular' | transloco | localeTitleCase}}"
+                                 class="border shadow-lg mt-2">
+                            <dxi-item itemType="group" caption="{{'calendar' | transloco | localeTitleCase}}"
+                                      class="border shadow-lg mt-2"
+                                      style="margin-bottom: 3rem">
+                                <div class="dx-fieldset">
+                                    <dx-lookup
+                                        [items]="scheduleList"
+                                        displayExpr="name"
+                                        valueExpr="id"
+                                        [value]="scheduleValue"
+                                        placeholder="{{'select.calendar'|transloco|localeTitleCase}}"
+                                        (onValueChanged)="scheduleValueChanged($event.value)">
+                                        <dxo-drop-down-options [showTitle]="false"></dxo-drop-down-options>
+                                    </dx-lookup>
+                                </div>
+                            </dxi-item>
+
+                            <dx-form id="form" [colCount]="1" [visible]="pSpesificTimeVisible">
+                                <dxi-item itemType="group" caption="{{'create.special.time'|transloco|localeTitleCase}}"
+                                          class="border shadow-lg mt-2">
+                                    <app-schedule-spesific-time [profileData]="profileData"
+                                                                [dataParamSchedule]="dataParamSchedule"
+                                                                *ngIf="profileData"
+                                                                (refreshAllGrid)="refreshAllGrid($event)"></app-schedule-spesific-time>
+                                </dxi-item>
+                            </dx-form>
+
+                            <dx-form id="form1" [colCount]="1" [visible]="pCustomDateVisible">
+                                <dxi-item itemType="group"
+                                          caption="{{'create.specific.time'|transloco|localeTitleCase}}"
+                                          class="border shadow-lg mt-2">
+                                    <app-schedule-custom-date [profileData]="profileData"
+                                                              [dataParamSchedule]="dataParamSchedule"
+                                                              *ngIf="profileData"
+                                                              (refreshAllGrid)="refreshAllGrid($event)"></app-schedule-custom-date>
+                                </dxi-item>
+                            </dx-form>
+
+                            <dx-form id="form2" [colCount]="1" [visible]="pSpesificDateVisible">
+                                <dxi-item itemType="group"
+                                          caption="{{'create.custom.schedule'|transloco|localeTitleCase}}"
+                                          class="border shadow-lg mt-2">
+                                    <app-schedule-spesific-date [profileData]="profileData"
+                                                                [dataParamSchedule]="dataParamSchedule"
+                                                                *ngIf="profileData"
+                                                                (refreshAllGrid)="refreshAllGrid($event)"></app-schedule-spesific-date>
+                                </dxi-item>
+                            </dx-form>
+
+                            <dx-form id="form8">
+                                <dxi-item itemType="group" [colCount]="2">
+                                    <div class="dx-field-value">
+                                        <dx-button
+                                            style="background-color: #6988c5"
+                                            stylingMode="contained"
+                                            text="{{'apply.current.profile'|transloco|localeTitleCase}}"
+                                            (onClick)="updateScheduleProfile()"
+                                            type="default">
+                                        </dx-button>
+                                    </div>
+                                </dxi-item>
+                            </dx-form>
+                        </mat-tab>
+
+
+                        <mat-tab label="{{'profile.break'|transloco|localeTitleCase}}" class="border shadow-lg mt-2">
+                            <dx-form id="form3" [colCount]="2">
+                                <dxi-item itemType="group" class="border shadow-lg mt-2">
+                                    <dxi-item itemType="group" caption="{{'break.list'|transloco|localeTitleCase}}"
+                                              class="border shadow-lg mt-2"
+                                              style="margin-bottom: 1rem">
+                                        <div class="dx-fieldset">
+                                            <dx-lookup
+                                                [items]="breakList"
+                                                displayExpr="parameter.name"
+                                                placeholder="{{'choose.break'|transloco}}"
+                                                (onValueChanged)="breakValueChanged($event)">
+                                                <dxo-drop-down-options [showTitle]="false"></dxo-drop-down-options>
+                                            </dx-lookup>
+                                        </div>
+                                    </dxi-item>
+                                </dxi-item>
+
+                                <dxi-item itemType="group">
+                                    <dxi-item itemType="group" caption="{{'calendar'|transloco|localeTitleCase}}"
+                                              class="border shadow-lg mt-2"
+                                              style="margin-bottom: 1rem">
+                                        <div class="dx-fieldset">
+                                            <dx-lookup
+                                                [items]="scheduleList"
+                                                displayExpr="name"
+                                                valueExpr="id"
+                                                [value]="scheduleBreakValue"
+                                                placeholder="{{'choose.calendar'|transloco}}"
+                                                (onValueChanged)="scheduleBreakValueChanged($event.value)">
+                                                <dxo-drop-down-options [showTitle]="false"></dxo-drop-down-options>
+                                            </dx-lookup>
+                                        </div>
+                                    </dxi-item>
+                                </dxi-item>
+                            </dx-form>
+
+                            <dx-form id="form4" [colCount]="1" [visible]="bSpesificTimeVisible">
+                                <dxi-item itemType="group"
+                                          caption="{{'create.special.time'|transloco|localeTitleCase}}"
+                                          class="border shadow-lg mt-2">
+                                    <app-break-spesific-time [profileData]="profileData"
+                                                             [breakId]="breakId" [dataParamBreak]="dataParamBreak"
+                                                             *ngIf="profileData"
+                                                             (refreshAllGrid)="refreshAllGrid($event)"></app-break-spesific-time>
+                                </dxi-item>
+                            </dx-form>
+
+                            <dx-form id="form5" [colCount]="1" [visible]="bCustomDateVisible">
+                                <dxi-item itemType="group"
+                                          caption="{{'create.specific.time'|transloco|localeTitleCase}}"
+                                          class="border shadow-lg mt-2">
+                                    <app-break-custom-date [profileData]="profileData"
+                                                           [breakId]="breakId" [dataParamBreak]="dataParamBreak"
+                                                           *ngIf="profileData"
+                                                           (refreshAllGrid)="refreshAllGrid($event)"></app-break-custom-date>
+                                </dxi-item>
+                            </dx-form>
+
+                            <dx-form id="form6" [colCount]="1" [visible]="bSpesificDateVisible">
+                                <dxi-item itemType="group"
+                                          caption="{{'create.custom.schedule'|transloco|localeTitleCase}}"
+                                          class="border shadow-lg mt-2">
+                                    <app-break-spesific-date [profileData]="profileData"
+                                                             [breakId]="breakId" [dataParamBreak]="dataParamBreak"
+                                                             *ngIf="profileData"
+                                                             (refreshAllGrid)="refreshAllGrid($event)"></app-break-spesific-date>
+                                </dxi-item>
+                            </dx-form>
+
+                            <dx-form id="form7" [colCount]="1">
+                                <!--                                <dxi-item itemType="group"-->
+                                <!--                                          caption="{{'break.profile.list'|transloco|localeTitleCase}}"-->
+                                <!--                                          class="border shadow-lg mt-2">-->
+                                <!--                                    <app-profile-break-grid [profileData]="profileData"-->
+                                <!--                                                            [breakId]="breakId"></app-profile-break-grid>-->
+                                <!--                                </dxi-item>-->
+                            </dx-form>
+
+                            <dx-form id="form9">
+                                <dxi-item itemType="group" [colCount]="2">
+                                    <div class="dx-field-value">
+                                        <dx-button
+                                            style="background-color: #6988c5"
+                                            stylingMode="contained"
+                                            text="{{'apply.current.profile'|transloco|localeTitleCase}}"
+                                            (onClick)="updateBreakProfile()"
+                                            type="default">
+                                        </dx-button>
+                                    </div>
+                                </dxi-item>
+                            </dx-form>
+                        </mat-tab>
+                    </mat-tab-group>
+
+                </div>
+            </dx-scroll-view>
+        </div>
+    </dx-popup>
+</div>

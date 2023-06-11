@@ -1,0 +1,135 @@
+<div
+    class="flex flex-col sm:flex-row md:flex-col flex-auto justify-between py-8 px-6 md:px-8 border-b bg-card dark:bg-transparent">
+    <div>
+        <div class="text-2xl font-extrabold tracking-tight">{{ 'user.list' | transloco | localeTitleCase }}</div>
+        <div>
+            <dx-data-grid #userDataGrid
+                          [columnAutoWidth]="false"
+                          [dataSource]="userDataSource"
+                          [showRowLines]="true"
+                          (onEditorPreparing)="onEditorPreparing($event)"
+                          (onInitNewRow)="onInitNewRow($event)"
+                          (onRowPrepared)="onRowPrepared($event)">
+                <dxo-editing
+                    mode="popup"
+                    [allowUpdating]="sessionService.isAuth('userUpdate')"
+                    [allowDeleting]="sessionService.isAuth('userDelete')"
+                    [allowAdding]="sessionService.isAuth('userSave')">
+                    <dxo-popup title="{{'user.info' |transloco | localeTitleCase}}" [showTitle]="true"></dxo-popup>
+                    <dxo-form>
+                        <dxi-item itemType="group" caption="{{'general.information' | transloco | localeTitleCase}}">
+                            <dxi-item dataField="enabled" [label]="{text: 'active'|transloco|localeTitleCase}"></dxi-item>
+                            <dxi-item dataField="username" [label]="{text: 'username' | transloco | localeTitleCase}"></dxi-item>
+                            <dxi-item dataField="password" [label]="{text: 'password' | transloco | localeTitleCase}"></dxi-item>
+                        </dxi-item>
+                        <dxi-item itemType="group" caption="{{'person.information' | transloco | localeTitleCase}}">
+                            <dxi-item dataField="person.identityNumber" [label]="{text: 'identityNumber' | transloco | localeTitleCase}"></dxi-item>
+                            <dxi-item dataField="person.name" [label]="{text: 'name' | transloco | localeTitleCase}"></dxi-item>
+                            <dxi-item dataField="person.surName" [label]="{text: 'surname' | transloco | localeTitleCase}"></dxi-item>
+                        </dxi-item>
+                        <dxi-item itemType="group" caption="{{'role.information' |transloco | localeTitleCase}}" [colSpan]="2">
+                            <dxi-item dataField="userDepartmentRoles" [label]="{visible: false}"></dxi-item>
+                        </dxi-item>
+                    </dxo-form>
+                </dxo-editing>
+
+                <dxi-column dataField="username" caption="{{'username' | transloco | localeTitleCase}}" [visible]="false">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-column>
+                <dxi-column dataField="password" caption="{{'password' | transloco | localeTitleCase}}" [visible]="false" [allowFiltering]="false"
+                            [allowSearch]="false" [allowSorting]="false"></dxi-column>
+
+                <dxi-column dataField="enabled" caption="{{'active' | transloco | localeTitleCase}}" [width]="50" dataType="boolean"
+                            [visible]="false"></dxi-column>
+                <dxi-column dataField="person.avatarId" caption="{{'image' | transloco | localeTitleCase}}" [width]="100" cellTemplate="cellPhotoTemplate"
+                            [allowFiltering]="false" [allowSearch]="false" [allowSorting]="false"></dxi-column>
+                <div *dxTemplate="let d of 'cellPhotoTemplate'">
+                    <img width="60"
+                         src="{{d.value? baseUrl + 'binaryContents/getPublicImage/' + d.value : 'assets/images/avatars/avatar.png'}}"
+                         alt="Resim">
+                </div>
+
+                <dxi-column dataField="person.identityNumber" caption="{{'identityNumber' | transloco | localeTitleCase}}" dataType="string" sortOrder="asc">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-column>
+                <dxi-column dataField="person.name" caption="{{'name' | transloco | localeTitleCase}}" dataType="string">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-column>
+
+                <dxi-column dataField="person.surName" caption="{{'surname' | transloco | localeTitleCase}}">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-column>
+
+                <dxi-column dataField="active" caption="{{'active' | transloco | localeTitleCase}}" [width]="50" dataType="boolean" [visible]="false"
+                            [allowSorting]="false"></dxi-column>
+
+                <dxi-column dataField="userDepartmentRoles" caption="{{'role.information' |transloco | localeTitleCase}}" [visible]="false"
+                            editCellTemplate="cellUserDepartmentRolesEditTemplate" [allowSorting]="false"
+                            [allowFiltering]="false" [allowSearch]="false">
+                </dxi-column>
+                <div *dxTemplate="let d of 'cellUserDepartmentRolesEditTemplate'">
+                    <dx-data-grid [dataSource]="(d.value)?d.value:[]"
+                                  (onRowInserted)="onUserDepartmentRolesInsertedUpdated($event, d)"
+                                  (onRowUpdated)="onUserDepartmentRolesInsertedUpdated($event, d)"
+                                  (onRowRemoved)="onUserDepartmentRolesInsertedUpdated($event, d)">
+                        <dxo-editing
+                            mode="row"
+                            [allowUpdating]="true"
+                            [allowDeleting]="true"
+                            [allowAdding]="true">
+                        </dxo-editing>
+                        <dxi-column dataField="role.id" caption="{{'role' |transloco | localeTitleCase}}" width="200">
+                            <dxo-lookup
+                                [dataSource]="roleDataSource"
+                                valueExpr="id"
+                                displayExpr="name">
+                            </dxo-lookup>
+                            <dxi-validation-rule type="required"></dxi-validation-rule>
+                        </dxi-column>
+                        <dxi-column dataField="department" caption="{{'department' | transloco |localeTitleCase}}" cellTemplate="cellDepartmentTemplate"
+                                    editCellTemplate="cellDepartmentEditTemplate" [allowSorting]="false">
+                            <div *dxTemplate="let d of 'cellDepartmentTemplate'">
+                                <div style="text-align: left">{{d.data.department.name}}</div>
+                            </div>
+                            <div *dxTemplate="let d of 'cellDepartmentEditTemplate'">
+                                <app-department-tree-list [itemValue]="(d.value && d.value.id)?d.value.id:null"
+                                                          placeHolder="{{'select.department' |transloco | localeTitleCase}}" title="{{'department' |transloco | localeTitleCase}}"
+                                                          (onValueChanged)="onDepartmentValueChanged($event, d)"></app-department-tree-list>
+                            </div>
+                            <dxi-validation-rule type="required"></dxi-validation-rule>
+                        </dxi-column>
+                    </dx-data-grid>
+                </div>
+
+                <dxo-search-panel
+                    [visible]="true"
+                    [width]="240">
+                </dxo-search-panel>
+
+                <dxo-load-panel [enabled]="true"></dxo-load-panel>
+
+                <dxo-paging [pageSize]="10"></dxo-paging>
+
+                <dxo-pager
+                    [showPageSizeSelector]="true"
+                    [allowedPageSizes]="[5, 10, 20]"
+                    [showInfo]="true">
+                </dxo-pager>
+
+                <dxo-filter-row
+                    [visible]="true">
+                </dxo-filter-row>
+                <dxo-header-filter
+                    [visible]=false>
+                </dxo-header-filter>
+
+                <dxo-remote-operations
+                    [sorting]="true"
+                    [paging]="true"
+                    [filtering]="true">
+                </dxo-remote-operations>
+
+            </dx-data-grid>
+        </div>
+    </div>
+</div>

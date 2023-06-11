@@ -1,0 +1,36 @@
+<!--    Break Widget-->
+<section class="bg-[#0D0D0D] rounded-3xl shadow-xl text-white p-4 grid grid-cols-3">
+    <div>
+        <h2 class="text-white text-4xl m-0">Breaks</h2>
+    </div>
+    <div class="col-span-2 px-4">
+        <ng-container *ngIf="workerBreakProfileData.length === 0">
+                <h1 class="m-0 text-xl font-thin text-white">Tanımlı profil bulunamadı</h1>
+        </ng-container>
+        <ng-container *ngIf="workerBreakProfileData">
+        <ngx-slick-carousel
+            class="carousel"
+            #slickModal="slick-carousel"
+            [config]="slickConfig"
+        >
+            <ng ngxSlickItem *ngFor="let break of workerBreakProfileData">
+                <section class="border-b border-l border-r border-white rounded-xl mx-1">
+                    <div class="bg-[#777EF4] flex items-center justify-start p-2 rounded-xl mx-[-1px]"><span class="text-white text-[12px]">{{break.day}}</span></div>
+                    <div class="flex items-center gap-x-2 p-2">
+                        <div class="flex items-center">
+                            <div class="border border-white flex flex-col justify-evenly items-start gap-y-1 rounded-lg pt-2 pb-1 pl-1 pr-2">
+                                <img src="assets/icons/meal.svg" class="w-[15px]" alt="break" />
+                                <p class="m-0 font-thin text-[12px]">{{break.breakType.parameter.description}}</p>
+                                <div>
+                                    <p class="m-0 font-thin text-[10px]">> {{break.fullTimeStart ? (break.fullTimeStart | date : 'HH:mm') : "Belirtilmemiş" }}</p>
+                                    <p class="m-0 font-thin text-[10px]">< {{break.fullTimeEnd ? (break.fullTimeEnd | date : 'HH:mm') : "Belirtilmemiş" }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </ng>
+        </ngx-slick-carousel>
+        </ng-container>
+    </div>
+</section>

@@ -1,0 +1,46 @@
+<div id="data-grid2" class="border shadow-lg mt-2">
+    <dx-data-grid
+        id="gridContainer_2"
+        [dataSource]="customTimeDataSource"
+        keyExpr="ID"
+        [allowColumnReordering]="true"
+        [showBorders]="true"
+        (onEditingStart)="logEvent('EditingStart')"
+        (onInitNewRow)="logEvent('InitNewRow')"
+        (onRowInserting)="logEvent('RowInserting')"
+        (onRowInserted)="logEvent('RowInserted')"
+        (onRowUpdating)="logEvent('RowUpdating')"
+        (onRowUpdated)="logEvent('RowUpdated')"
+        (onRowRemoving)="logEvent('RowRemoving')"
+        (onRowRemoved)="logEvent('RowRemoved')"
+        (onSaving)="logEvent('Saving')"
+        (onSaved)="logEvent('Saved')"
+        (onEditCanceling)="logEvent('EditCanceling')"
+        (onEditCanceled)="logEvent('EditCanceled')"
+    >
+        <dxo-paging [enabled]="true"></dxo-paging>
+        <dxo-editing
+            mode="row"
+            [allowUpdating]="true"
+            [allowDeleting]="true"
+            [allowAdding]="true"
+            [useIcons]="true">
+        </dxo-editing>
+        <dxi-column dataField="fullTimeStart" dataType="datetime"
+                    caption="{{'start.date'|transloco|localeTitleCase}}">
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column dataField="fullTimeEnd" dataType="datetime"
+                    caption="{{'end.date'|transloco|localeTitleCase}}">
+            <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-column>
+    </dx-data-grid>
+
+    <dx-form id="form" style="margin-left: 0.3rem">
+        <dxi-item itemType="group" cssClass="first-group" [colCount]="4">
+            <dxi-item itemType="group">
+                <dx-radio-group [items]="priorities" [value]="isvalid"></dx-radio-group>
+            </dxi-item>
+        </dxi-item>
+    </dx-form>
+</div>

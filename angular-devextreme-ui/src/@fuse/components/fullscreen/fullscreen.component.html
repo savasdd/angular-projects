@@ -1,0 +1,13 @@
+<!-- Button -->
+<button
+    mat-icon-button
+    [matTooltip]="tooltip ||  'full.screen' | transloco | localeTitleCase "
+    (click)="toggleFullscreen()">
+    <ng-container [ngTemplateOutlet]="iconTpl || defaultIconTpl"></ng-container>
+</button>
+
+<!-- Default icon -->
+<ng-template #defaultIconTpl>
+<!--    <mat-icon [svgIcon]="'heroicons_outline:arrows-expand'" class="text-white"></mat-icon>-->
+    <img class="h-5 w-5" src="../../assets/icons/arrows-expand-full-line.svg" alt="Fullscreen"/>
+</ng-template>
