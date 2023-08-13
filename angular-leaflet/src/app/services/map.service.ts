@@ -3,6 +3,8 @@ import {LatLngBounds} from 'leaflet';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import * as $ from 'jquery';
 import {Observable} from 'rxjs';
+import {ButtonProperties} from "./dto/geo-button-properties";
+import {GeoJsonModelView} from "./dto/geo-json-model";
 
 declare let L: any;
 
@@ -609,23 +611,4 @@ export class MapService {
     });
   }
 
-}
-
-
-export class GeoJsonModelView {
-  // layerName: string;
-  'the_geom': string;
-  properties: string[] | undefined;
-  // filter: string;
-  // maxFeatures: number;
-}
-
-export class ButtonProperties {
-  icon: string | undefined;
-  backgroundColor: string | undefined;
-  title: string | undefined;
-  position: string | undefined;
-  marginTop: string | undefined;
-  fontSize: string | undefined;
-  paddingTop: string | undefined;
 }
