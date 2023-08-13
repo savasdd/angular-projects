@@ -6,8 +6,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutComponent} from './pages/layout/layout.component';
 import {AgGridModule} from 'ag-grid-angular';
-import {HttpModule} from '@angular/http';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
     BrowserAnimationsModule,
     AgGridModule,
     HttpClientModule,
-    HttpModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
