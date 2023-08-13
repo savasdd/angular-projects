@@ -95,7 +95,21 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/leaflet-fullscreen/dist/leaflet.fullscreen.css",
+              "node_modules/leaflet-mouse-position/src/L.Control.MousePosition.css",
+              "node_modules/leaflet.markercluster/dist/MarkerCluster.css",
+              "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
+              "node_modules/leaflet-easybutton/src/easy-button.css",
+              "node_modules/leaflet-draw/dist/leaflet.draw.css",
+              "node_modules/leaflet-contextmenu/dist/leaflet.contextmenu.css",
+              "node_modules/leaflet-iconmaterial/dist/leaflet.icon-material.css",
+              "node_modules/@material/fab/dist/mdc.fab.css",
+              "src/styles/soft-ui/soft-ui-dashboard-tailwind.css",
+              "node_modules/angular2-draggable/css/resizable.min.css",
+              "node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css",
+              "node_modules/leaflet-control-geocoder/dist/Control.Geocoder.css"
             ],
             "scripts": []
           }
