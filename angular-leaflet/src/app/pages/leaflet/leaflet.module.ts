@@ -6,6 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { RoutingComponent } from './routing/routing.component';
 import { AntPathComponent } from './ant-path/ant-path.component';
 import { GeofenceComponent } from './geofence/geofence.component';
+import {MatTableModule} from "@angular/material/table";
+import {AgGridModule} from "ag-grid-angular";
 
 export const appRoutes: Route[] = [
   { path: 'landmark', component: LandmarkComponent },
@@ -26,6 +28,8 @@ export const appRoutes: Route[] = [
   imports: [
     CommonModule,
     RouterModule.forChild(appRoutes),
+    MatTableModule,
+    AgGridModule,
   ]
 })
 export class LeafletModule { }
