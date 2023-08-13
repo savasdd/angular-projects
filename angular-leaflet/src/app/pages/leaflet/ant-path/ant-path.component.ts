@@ -23,6 +23,9 @@ export class AntPathComponent implements OnInit {
   public defaultColDef: ColDef = {
     sortable: true,
     filter: true,
+    resizable: true,
+    flex: 1,
+    minWidth: 100,
   };
 
   public rowData$!: Observable<any[]>;
