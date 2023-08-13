@@ -1,7 +1,15 @@
 
-.card{
-    margin-left: 2rem;
-    margin-right: 2rem;
-    margin-top: 2rem;
-    inline-size: none;
+.card {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  inline-size: none;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
 }
