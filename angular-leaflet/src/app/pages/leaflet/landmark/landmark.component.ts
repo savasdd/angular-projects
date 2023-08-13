@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {MapService} from "../../../services/map.service";
 
 @Component({
   selector: 'app-landmark',
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class LandmarkComponent {
 
-  constructor(){
+  constructor(private mapService: MapService,) {
     console.log("denemes")
   }
 
