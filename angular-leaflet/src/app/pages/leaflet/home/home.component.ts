@@ -20,31 +20,31 @@ export class HomeComponent implements OnInit {
   landmark() {
     this.router.navigate(['/leaflet/landmark'], {
       queryParams: {
-        data:null,
+        data: null,
       }
     });
   }
 
   routing() {
-    this.router.navigate(['/leaflet/landmark'], {
+    this.router.navigate(['/leaflet/routing'], {
       queryParams: {
-        data:null,
+        data: null,
       }
     });
   }
 
   antPath() {
-    this.router.navigate(['/leaflet/landmark'], {
+    this.router.navigate(['/leaflet/ant-path'], {
       queryParams: {
-        data:null,
+        data: null,
       }
     });
   }
 
   geofence() {
-    this.router.navigate(['/leaflet/landmark'], {
+    this.router.navigate(['/leaflet/geofence'], {
       queryParams: {
-        data:null,
+        data: null,
       }
     });
   }
